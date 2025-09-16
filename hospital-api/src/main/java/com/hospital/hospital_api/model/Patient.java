@@ -1,6 +1,7 @@
 package com.hospital.hospital_api.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 
@@ -15,6 +16,12 @@ public class Patient {
     private String name;
     private int age;
     private String diagnosis;
+
+    // link to doctors
+    @ManyToOne
+    @JoinColumn(name = "doctor_id")
+    @JsonBackReference
+    private Doctor doctor;
 
     // --- Constructors ---
     public Patient() {}
@@ -38,4 +45,8 @@ public class Patient {
 
     public String getDiagnosis() { return diagnosis; }
     public void setDiagnosis(String diagnosis) { this.diagnosis = diagnosis; }
+
+    // Add getters & setters for doctor
+    public Doctor getDoctor() { return doctor; }
+    public void setDoctor(Doctor doctor) { this.doctor = doctor; }
 }
