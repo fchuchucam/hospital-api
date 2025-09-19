@@ -42,11 +42,14 @@ public class AppointmentService {
                 .orElseThrow(() -> new RuntimeException("Doctor not found"));
 
         // Rule: doctor cannot have two appointments at same time
-        appointmentRepo.findByDoctorAndDateTime(doctor, dateTime)
+       /* appointmentRepo.findByDoctorAndDateTime(doctor, dateTime)
                 .ifPresent(a -> {
                     throw new RuntimeException("Doctor already has an appointment at this time");
-                });
+                });*/
 
+        if (appointmentRepo.existsByDoctorAndDateTime(doctor, dateTime)) {
+            throw new IllegalStateException("Doctor already has an appointment at this time");
+        }
         Appointment appointment = new Appointment();
         appointment.setPatient(patient);
         appointment.setDoctor(doctor);

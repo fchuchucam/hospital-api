@@ -1,4 +1,5 @@
 package com.hospital.hospital_api.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -17,7 +18,7 @@ public class Doctor {
 
     // One doctor can have many patients
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonIgnore
     private List<Patient> patients;
 
     // --- Constructors ---
